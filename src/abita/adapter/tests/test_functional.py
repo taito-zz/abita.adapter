@@ -1,9 +1,9 @@
 from abita.adapter.tests.base import FUNCTIONAL_TESTING
 from hexagonit.testing.browser import Browser
-from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.app.testing import TEST_USER_PASSWORD
+from plone.app.testing import setRoles
 from plone.testing import layered
 from zope.testing import renormalizing
 

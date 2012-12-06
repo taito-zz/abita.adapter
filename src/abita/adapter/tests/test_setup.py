@@ -12,6 +12,11 @@ class TestCase(IntegrationTestCase):
         installer = getToolByName(self.portal, 'portal_quickinstaller')
         self.assertTrue(installer.isProductInstalled('abita.adapter'))
 
+    def test_metadata__version(self):
+        setup = getToolByName(self.portal, 'portal_setup')
+        self.assertEqual(
+            setup.getVersionForProfile('profile-abita.adapter:default'), u'0')
+
     def test_uninstall__package(self):
         installer = getToolByName(self.portal, 'portal_quickinstaller')
         installer.uninstallProducts(['abita.adapter'])

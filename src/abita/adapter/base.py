@@ -26,7 +26,15 @@ class BaseAdapter(grok.Adapter):
         if depth:
             path = {'query': path, 'depth': depth}
         query['path'] = path
+        sort_limit = query.get('sort_limit')
+        if sort_limit:
+            return self._catalog()(query)[:sort_limit]
         return self._catalog()(query)
+
+    def get_brain(self, **query):
+        brains = self.get_brains(**query)
+        if brains:
+            return brains[0]
 
     def get_content_listing(self, **query):
         return IContentListing(self.get_brains(**query))

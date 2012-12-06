@@ -1,1 +1,5 @@
-See `abita/adapter/docs/README.rst <https://github.com/abita/abita.adapter/blob/master/abita/adapter/docs/README.rst>`_
+=============
+abita.adapter
+=============
+
+abita.adaper provides useful helper adapters for Plone.

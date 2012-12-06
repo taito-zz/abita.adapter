@@ -1,4 +1,3 @@
-from Products.CMFCore.utils import getToolByName
 from abita.adapter.tests.base import IntegrationTestCase
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
@@ -12,7 +11,6 @@ class TestCase(IntegrationTestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-
 
     def test__get_brains__empty(self):
         from abita.adapter.interfaces import IBaseAdapter

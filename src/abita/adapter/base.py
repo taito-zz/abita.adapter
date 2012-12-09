@@ -40,15 +40,10 @@ class BaseAdapter(grok.Adapter):
         return IContentListing(self.get_brains(**query))
 
     @memoize
-    def _ulocalized_time(self):
+    def ulocalized_time(self):
         """Return ulocalized_time method.
 
         :rtype: method
         """
         translation_service = getToolByName(self.context, 'translation_service')
         return translation_service.ulocalized_time
-
-    def localized_time(self, item, date_type='modified', long_format=False):
-        ulocalized_time = self._ulocalized_time()
-        return ulocalized_time(getattr(item, date_type),
-            long_format=long_format, context=self.context)

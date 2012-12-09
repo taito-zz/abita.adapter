@@ -79,5 +79,6 @@ class TestCase(IntegrationTestCase):
         folder1.reindexObject()
 
         getToolByName().ulocalized_time.return_value = u'Dec 05, 2012'
+        localized_time = base.ulocalized_time()
 
-        self.assertEqual(base.localized_time(base.get_brain()), u'Dec 05, 2012')
+        self.assertEqual(localized_time(), u'Dec 05, 2012')

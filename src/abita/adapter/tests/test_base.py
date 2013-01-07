@@ -21,6 +21,7 @@ class TestCase(IntegrationTestCase):
         self.assertEqual(len(base.get_brains(**query)), 0)
         self.assertEqual(len(base.get_content_listing(**query)), 0)
         self.assertIsNone(base.get_brain(**query))
+        self.assertIsNone(base.get_object(**query))
 
     def test__one_folder(self):
         """Add folder under portal."""
@@ -35,22 +36,26 @@ class TestCase(IntegrationTestCase):
         self.assertEqual(len(base.get_brains(**query)), 1)
         self.assertEqual(len(base.get_content_listing(**query)), 1)
         self.assertEqual(base.get_brain(**query).id, 'folder1')
+        self.assertEqual(base.get_object(**query).id, 'folder1')
 
         query = {'path': '/'.join(folder1.getPhysicalPath())}
 
         self.assertEqual(len(base.get_brains(**query)), 1)
         self.assertEqual(len(base.get_content_listing(**query)), 1)
         self.assertEqual(base.get_brain(**query).id, 'folder1')
+        self.assertEqual(base.get_object(**query).id, 'folder1')
 
         query['depth'] = 0
         self.assertEqual(len(base.get_brains(**query)), 1)
         self.assertEqual(len(base.get_content_listing(**query)), 1)
         self.assertEqual(base.get_brain(**query).id, 'folder1')
+        self.assertEqual(base.get_object(**query).id, 'folder1')
 
         query['depth'] = 1
         self.assertEqual(len(base.get_brains(**query)), 0)
         self.assertEqual(len(base.get_content_listing(**query)), 0)
         self.assertIsNone(base.get_brain(**query))
+        self.assertIsNone(base.get_object(**query))
 
     def test__two_folders(self):
         from abita.adapter.interfaces import IBaseAdapter

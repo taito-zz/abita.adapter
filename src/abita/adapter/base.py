@@ -36,6 +36,11 @@ class BaseAdapter(grok.Adapter):
         if brains:
             return brains[0]
 
+    def get_object(self, **query):
+        brain = self.get_brain(**query)
+        if brain:
+            return brain.getObject()
+
     def get_content_listing(self, **query):
         return IContentListing(self.get_brains(**query))
 

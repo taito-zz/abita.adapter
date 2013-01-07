@@ -10,6 +10,9 @@ class IBaseAdapter(Interface):
     def get_brain(**query):  # pragma: no cover
         """Get brain which is surposed to be only one."""
 
+    def get_object(**query):  # pragma: no cover
+        """Get object which is surposed to be only one."""
+
     def get_content_listing(**query):  # pragma: no cover
         """Get ContentListing from brains gotten from get_brains method."""
 

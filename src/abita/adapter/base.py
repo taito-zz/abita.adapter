@@ -17,7 +17,11 @@ class BaseAdapter(grok.Adapter):
     def _catalog(self):
         return getToolByName(self.context, 'portal_catalog')
 
-    def get_brains(self, **query):
+    def get_brains(self, interfaces=None, **query):
+        if interfaces is not None:
+            if not isinstance(interfaces, list):
+                interfaces = [interfaces]
+                query['object_provides'] = [interface.__identifier__ for interface in interfaces]
         # Set default path
         path = query.get('path')
         if path is None:
@@ -31,18 +35,18 @@ class BaseAdapter(grok.Adapter):
             return self._catalog()(query)[:sort_limit]
         return self._catalog()(query)
 
-    def get_brain(self, **query):
-        brains = self.get_brains(**query)
+    def get_brain(self, interfaces=None, **query):
+        brains = self.get_brains(interfaces=interfaces, **query)
         if brains:
             return brains[0]
 
-    def get_object(self, **query):
-        brain = self.get_brain(**query)
+    def get_object(self,interfaces=None,  **query):
+        brain = self.get_brain(interfaces=interfaces, **query)
         if brain:
             return brain.getObject()
 
-    def get_content_listing(self, **query):
-        return IContentListing(self.get_brains(**query))
+    def get_content_listing(self, interfaces=None, **query):
+        return IContentListing(self.get_brains(interfaces=interfaces, **query))
 
     @memoize
     def ulocalized_time(self):

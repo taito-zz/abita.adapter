@@ -13,6 +13,7 @@ class BaseAdapter(grok.Adapter):
     grok.context(Interface)
     grok.provides(IBaseAdapter)
 
+    @property
     @memoize
     def _catalog(self):
         return getToolByName(self.context, 'portal_catalog')
@@ -32,15 +33,15 @@ class BaseAdapter(grok.Adapter):
         query['path'] = path
         sort_limit = query.get('sort_limit')
         if sort_limit:
-            return self._catalog()(query)[:sort_limit]
-        return self._catalog()(query)
+            return self._catalog(query)[:sort_limit]
+        return self._catalog(query)
 
     def get_brain(self, interfaces=None, **query):
         brains = self.get_brains(interfaces=interfaces, **query)
         if brains:
             return brains[0]
 
-    def get_object(self,interfaces=None,  **query):
+    def get_object(self, interfaces=None, **query):
         brain = self.get_brain(interfaces=interfaces, **query)
         if brain:
             return brain.getObject()
@@ -48,11 +49,11 @@ class BaseAdapter(grok.Adapter):
     def get_content_listing(self, interfaces=None, **query):
         return IContentListing(self.get_brains(interfaces=interfaces, **query))
 
-    @memoize
-    def ulocalized_time(self):
-        """Return ulocalized_time method.
+    # @memoize
+    # def ulocalized_time(self):
+    #     """Return ulocalized_time method.
 
-        :rtype: method
-        """
-        translation_service = getToolByName(self.context, 'translation_service')
-        return translation_service.ulocalized_time
+    #     :rtype: method
+    #     """
+    #     translation_service = getToolByName(self.context, 'translation_service')
+    #     return translation_service.ulocalized_time

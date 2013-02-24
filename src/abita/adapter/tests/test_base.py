@@ -2,7 +2,7 @@ from abita.adapter.tests.base import IntegrationTestCase
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
 
-import mock
+# import mock
 
 
 class TestCase(IntegrationTestCase):
@@ -128,15 +128,15 @@ class TestCase(IntegrationTestCase):
         self.assertEqual(len(base.get_brains([IATDocument, IATFolder])), 2)
         self.assertEqual(len(base.get_content_listing([IATDocument, IATFolder])), 2)
 
-    @mock.patch('abita.adapter.base.getToolByName')
-    def test__localized_time(self, getToolByName):
-        from abita.adapter.interfaces import IBaseAdapter
-        base = IBaseAdapter(self.portal)
+    # @mock.patch('abita.adapter.base.getToolByName')
+    # def test__localized_time(self, getToolByName):
+    #     from abita.adapter.interfaces import IBaseAdapter
+    #     base = IBaseAdapter(self.portal)
 
-        folder1 = self.portal[self.portal.invokeFactory('Folder', 'folder1')]
-        folder1.reindexObject()
+    #     folder1 = self.portal[self.portal.invokeFactory('Folder', 'folder1')]
+    #     folder1.reindexObject()
 
-        getToolByName().ulocalized_time.return_value = u'Dec 05, 2012'
-        localized_time = base.ulocalized_time()
+    #     getToolByName().ulocalized_time.return_value = u'Dec 05, 2012'
+    #     localized_time = base.ulocalized_time()
 
-        self.assertEqual(localized_time(), u'Dec 05, 2012')
+    #     self.assertEqual(localized_time(), u'Dec 05, 2012')

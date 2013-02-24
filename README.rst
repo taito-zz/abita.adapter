@@ -7,6 +7,11 @@ abita.adaper provides useful helper adapters for Plone.
 Changelog
 ---------
 
+0.4.1 (2013-02-24)
+==================
+
+- Removed method: localized_time. [taito]
+
 0.4 (2013-02-24)
 ================
 

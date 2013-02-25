@@ -17,5 +17,8 @@ class IBaseAdapter(Interface):
     def get_content_listing(interfaces=None, **query):  # pragma: no cover
         """Get ContentListing from brains gotten from get_brains method."""
 
+    def event_datetime(item):  # pragma: no cover
+        """Returns ulocalized_time event datetime."""
+
     ulocalized_time = Attribute("ulocalized_time method from translation_service")
     getSessionData = Attribute("getSessionData method from session_data_manager")

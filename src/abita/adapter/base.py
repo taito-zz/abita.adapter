@@ -66,3 +66,19 @@ class BaseAdapter(grok.Adapter):
         :rtype: method
         """
         return getToolByName(self.context, 'session_data_manager').getSessionData
+
+    def event_datetime(self, item):
+        start = item.start
+        end = item.end
+        start_dt = self.ulocalized_time(start, long_format=True, context=self.context)
+        if start.Date() == end.Date():
+            if start == end:
+                dt = start_dt
+            else:
+                end_time = self.ulocalized_time(end, time_only=True)
+                dt = u'{} - {}'.format(start_dt, end_time)
+        else:
+            end_dt = self.ulocalized_time(end, long_format=True, context=self.context)
+            dt = u'{} - {}'.format(start_dt, end_dt)
+
+        return dt

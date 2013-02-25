@@ -137,3 +137,26 @@ class TestCase(IntegrationTestCase):
     def test_getSessionData(self, getToolByName):
         from abita.adapter.interfaces import IBaseAdapter
         self.assertEqual(IBaseAdapter(self.portal).getSessionData, getToolByName().getSessionData)
+
+    def create_event(self, **kwargs):
+        event = self.portal[self.portal.invokeFactory('Event', **kwargs)]
+        event.reindexObject()
+        return event
+
+    def test_event_datetime(self):
+        from abita.adapter.interfaces import IBaseAdapter
+        base = IBaseAdapter(self.portal)
+
+        from DateTime import DateTime
+        self.create_event(id='event1', startDate=DateTime('2013/02/25'), endDate=DateTime('2013/02/25'))
+        self.create_event(id='event2', startDate=DateTime('2013/02/26 20:00'), endDate=DateTime('2013/02/26 22:00'))
+        self.create_event(id='event3', startDate=DateTime('2013/02/27'), endDate=DateTime('2013/02/28'))
+
+        from Products.ATContentTypes.interfaces.event import IATEvent
+        res = []
+        for item in base.get_content_listing(IATEvent, sort_on='start'):
+            res.append(base.event_datetime(item))
+        self.assertEqual(res, [
+            u'Feb 25, 2013 12:00 AM',
+            u'Feb 26, 2013 08:00 PM - 10:00 PM',
+            u'Feb 27, 2013 12:00 AM - Feb 28, 2013 12:00 AM'])

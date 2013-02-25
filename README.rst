@@ -7,6 +7,11 @@ abita.adaper provides useful helper adapters for Plone.
 Changelog
 ---------
 
+0.6 (2013-02-xx)
+================
+
+- Added method: event_datetime. [taito]
+
 0.5 (2013-02-25)
 ================
 

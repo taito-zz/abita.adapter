@@ -7,6 +7,11 @@ abita.adaper provides useful helper adapters for Plone.
 Changelog
 ---------
 
+0.5 (2013-02-25)
+================
+
+- Added two properties: ulocalized_time and getSessionData. [taito]
+
 0.4.1 (2013-02-24)
 ==================
 

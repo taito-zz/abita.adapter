@@ -3,7 +3,7 @@ from Products.CMFCore.utils import getToolByName
 from abita.adapter.interfaces import IBaseAdapter
 from five import grok
 from plone.app.contentlisting.interfaces import IContentListing
-from plone.memoize.instance import memoize
+from plone.memoize.forever import memoize
 from zope.interface import Interface
 
 
@@ -49,11 +49,20 @@ class BaseAdapter(grok.Adapter):
     def get_content_listing(self, interfaces=None, **query):
         return IContentListing(self.get_brains(interfaces=interfaces, **query))
 
-    # @memoize
-    # def ulocalized_time(self):
-    #     """Return ulocalized_time method.
+    @property
+    @memoize
+    def ulocalized_time(self):
+        """Return ulocalized_time method.
 
-    #     :rtype: method
-    #     """
-    #     translation_service = getToolByName(self.context, 'translation_service')
-    #     return translation_service.ulocalized_time
+        :rtype: method
+        """
+        return getToolByName(self.context, 'translation_service').ulocalized_time
+
+    @property
+    @memoize
+    def getSessionData(self):
+        """Returns getSessionData method.
+
+        :rtype: method
+        """
+        return getToolByName(self.context, 'session_data_manager').getSessionData

@@ -1,3 +1,4 @@
+from zope.interface import Attribute
 from zope.interface import Interface
 
 
@@ -16,5 +17,5 @@ class IBaseAdapter(Interface):
     def get_content_listing(interfaces=None, **query):  # pragma: no cover
         """Get ContentListing from brains gotten from get_brains method."""
 
-    # def localized_time(item, date_type, long_format=False):  # pragma: no cover
-    #     """Returns localized time."""
+    ulocalized_time = Attribute("ulocalized_time method from translation_service")
+    getSessionData = Attribute("getSessionData method from session_data_manager")

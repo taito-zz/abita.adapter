@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='abita.adapter',
-    version='0.5',
+    version='0.6',
     description='Provides useful helper adapters for Plone.',
     long_description=open("README.rst").read(),
     classifiers=[
